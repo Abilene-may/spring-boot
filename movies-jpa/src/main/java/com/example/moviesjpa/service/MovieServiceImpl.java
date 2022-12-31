@@ -1,5 +1,6 @@
 package com.example.moviesjpa.service;
 
+import com.example.moviesjpa.dto.MovieDTO;
 import com.example.moviesjpa.entity.Movie;
 import com.example.moviesjpa.exception.NotFoundException;
 import com.example.moviesjpa.repository.MovieRepository;
@@ -27,6 +28,18 @@ public class MovieServiceImpl implements MovieService{
             throw new NotFoundException("Không tìm thấy dữ liệu movie id = " + id, 400);
         }
         return movieByID.get();
+    }
+
+    @Override
+    public MovieDTO getMovieByLanguage(String language) {
+        List<Movie> movie = movieRepository.findMovieByLanguage(language);
+        if (movie.isEmpty()) {
+            throw new NotFoundException("Không tìm thấy dữ liệu movie có language là " + language, 404);
+        }
+        MovieDTO movieDTO = new MovieDTO();
+        movieDTO.setMovies(movie);
+        movieDTO.setCount(movie.size());
+        return movieDTO;
     }
 
     @Override
