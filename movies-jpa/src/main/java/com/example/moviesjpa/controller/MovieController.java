@@ -1,5 +1,6 @@
 package com.example.moviesjpa.controller;
 
+import com.example.moviesjpa.dto.MovieDTO;
 import com.example.moviesjpa.entity.Movie;
 import com.example.moviesjpa.request.MovieRequest;
 import com.example.moviesjpa.service.MovieService;
@@ -35,6 +36,20 @@ public class MovieController {
         return new ResponseEntity<>(movieService.getMovieByiD(movieRequest.getId()), HttpStatus.OK);
     }
 
+    /**
+     * @param movieRequest
+     * @return danh sách movie theo language
+     */
+    @PostMapping ("/search-by-language")
+    public ResponseEntity<MovieDTO> getMovieByLanguage(@RequestBody MovieRequest movieRequest)
+    {
+        return new ResponseEntity<>(movieService.getMovieByLanguage(movieRequest.getLanguage()), HttpStatus.OK);
+    }
+
+    /**
+     * @param movieRequest
+     * @return movie vừa tạo
+     */
     @PostMapping("/create-movie")
     public ResponseEntity<Movie> createMovie(@RequestBody MovieRequest movieRequest){
         return new ResponseEntity<>(movieService.createMovie(movieRequest), HttpStatus.OK);
@@ -52,7 +67,7 @@ public class MovieController {
 
     /**
      * @param id
-     * @return
+     * @return mess "Xóa thành công" hoặc báo lỗi "Không tìm thấy dữ liệu"
      */
     @DeleteMapping("/delete-by-id/{id}")
     public ResponseEntity<String> deleteMovieByID(@PathVariable Long id){
