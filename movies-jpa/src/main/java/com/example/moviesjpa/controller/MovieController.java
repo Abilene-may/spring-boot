@@ -67,12 +67,12 @@ public class MovieController {
 
     /**
      * @param id
-     * @return mess "Xóa thành công" hoặc báo lỗi "Không tìm thấy dữ liệu"
+     * @return mess 204 No Content
      */
     @DeleteMapping("/delete-by-id/{id}")
-    public ResponseEntity<String> deleteMovieByID(@PathVariable Long id){
+    public ResponseEntity<Void> deleteMovieByID(@PathVariable Long id){
         movieService.deleteMovie(id);
-        return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 
 }
