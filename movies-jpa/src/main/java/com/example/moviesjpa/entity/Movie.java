@@ -9,7 +9,6 @@ import lombok.*;
 @Getter
 @Entity(name = "movie")
 @Table(name = "movie")
-
 public class Movie {
     @Id
     @GeneratedValue(generator = "movie_seq", strategy = GenerationType.SEQUENCE)
@@ -27,8 +26,7 @@ public class Movie {
 
     @Column(name = "language")
     private String language;
-
+    
     @Column(name = "year")
     private int year;
-
 }
